@@ -18,11 +18,11 @@ This will have an interface similar to latex with the rendered view on the right
 
 Functionalities which will be provided will be-
 
-- [] Download as pdf
-- [] Download as docx
-- [] Automatic Clubbing of subject questions
-- [] Automatic Clubbing of Answer on the basis of Type
-- [] Automatic same marks for same type questions but should be editable
-- [] Automatic new question should have same subject, marks, answer(Type) as previous question
-- [] Should be saved and be editable
-- [] Should be sharable between multiple users
+- [ ] Download as pdf
+- [ ] Download as docx
+- [ ] Automatic Clubbing of subject questions
+- [ ] Automatic Clubbing of Answer on the basis of Type
+- [ ] Automatic same marks for same type questions but should be editable
+- [ ] Automatic new question should have same subject, marks, answer(Type) as previous question
+- [ ] Should be saved and be editable
+- [ ] Should be sharable between multiple users
