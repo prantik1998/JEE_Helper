@@ -26,3 +26,4 @@ Functionalities which will be provided will be-
 - [ ] Automatic new question should have same subject, marks, answer(Type) as previous question
 - [ ] Should be saved and be editable
 - [ ] Should be sharable between multiple users
+- [ ] ``` Codes written inside these enclosing should be rendered. For ex. in text field a person can put <put image here> and while rendering this should be given the priority. This feature should also be there as a functionality.```
