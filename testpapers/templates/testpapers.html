@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6" align="center">
+	<form id="Question 1">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="Subject">Subject</label>
+					<input type="text" class="form-control" id="Subject" placeholder="Physics">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="Question Type">Question Type</label>
+					<select class="form-control" id="Question Type">
+						<option>MCQ</option>
+						<option>MCQ(Multiple Correct)</option>
+						<option>Integer Type</option>
+						<option>Numeric</option>
+						<option>Subjective</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+		
+				<div class="form-group">
+					<label for="On Correct Marks">On Correct Marks</label>
+					<input type="text" class="form-control" id="On Correct Marks" placeholder="4">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="Negative Marks">Negative Marks</label>
+					<input type="text" class="form-control" id="Negative Marks" placeholder="-2">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="QuestionText">Question Text</label>
+			<textarea class="form-control" id="QuestionText" rows="5	"></textarea>
+		</div>
+
+
+		<div class="custom-file" id="Figure">
+			<input type="file" class="custom-file-input" id="validatedCustomFile" required>
+			<img id="blah" src="#" alt="your image" style="visibility: hidden;" />
+			<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+			<div class="invalid-feedback">Example invalid custom file feedback</div>
+		</div>
+	</form>
+	<div class="row">
+		<br>
+	</div>
+	<form id="Question 2">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="Subject">Subject</label>
+					<input type="text" class="form-control" id="Subject" placeholder="Physics">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="Question Type">Question Type</label>
+					<select class="form-control" id="Question Type">
+						<option>MCQ</option>
+						<option>MCQ(Multiple Correct)</option>
+						<option>Integer Type</option>
+						<option>Numeric</option>
+						<option>Subjective</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+		
+				<div class="form-group">
+					<label for="On Correct Marks">On Correct Marks</label>
+					<input type="text" class="form-control" id="On Correct Marks" placeholder="4">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="Negative Marks">Negative Marks</label>
+					<input type="text" class="form-control" id="Negative Marks" placeholder="-2">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="QuestionText">Question Text</label>
+			<textarea class="form-control" id="QuestionText" rows="5	"></textarea>
+		</div>
+
+
+		<div class="custom-file" id="Figure">
+			<input type="file" class="custom-file-input" id="validatedCustomFile" required>
+			<!-- <img id="blah" src="#" alt="your image" /> -->
+			<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+			<div class="invalid-feedback">Example invalid custom file feedback</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+	
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+document.getElementById("blah").visible = false; 
+
+$("#validatedCustomFile").change(function(){
+	// var node = document.createElement("img");
+	var node = document.getElementById("blah");
+	node.id = 'blah'
+	node.src = "#"
+	node.alt = "your image"
+	node.style.visibility = "visible";
+	document.getElementById("Figure").appendChild(node); 
+    readURL(this);
+
+});
+
+</script>
+{% endblock content %}
