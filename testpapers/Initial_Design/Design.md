@@ -10,11 +10,14 @@ Question Papers have usually only these components -
 4) Answer (Choices(If applicable))
 5) Subject
 6) Marks
+7) Equations
 
 We can provide a real-time rendering mechanism for the papers, everytime a new question is created.
 A real-time rendering of the OMR can also be done
 
 This will have an interface similar to latex with the rendered view on the right and the editable questions on the left
+
+Replicate the Google Form view exactly. They have done a good job, we can just try to copy.
 
 Functionalities which will be provided will be-
 
