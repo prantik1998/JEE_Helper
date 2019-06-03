@@ -10,5 +10,9 @@ class TestPapersView(TemplateView):
 class AboutPageView(TemplateView):
 	template_name = 'about.html'
 
+
+class PdfPageView(TemplateView):
+	template_name = 'create_pdf.html'
+
 # def testpapersView(request):
 #     return HttpResponse('Hello, World!')
