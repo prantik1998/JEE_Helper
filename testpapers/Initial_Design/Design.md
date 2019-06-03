@@ -30,3 +30,92 @@ Functionalities which will be provided will be-
 - [ ] Should be saved and be editable
 - [ ] Should be sharable between multiple users
 - [ ] ``` Codes written inside these enclosing should be rendered. For ex. in text field a person can put <put image here> and while rendering this should be given the priority. This feature should also be there as a functionality.```
+
+Form should return
+
+{
+
+    'First_Paper_Heading': 'October PMT'
+    'header' : 'This is a Question Paper',
+    'footer': 'Prime Viman Nagar Pune - 411014'
+    'Instructions_Header': 'This is strict and serious and you have to follow it',
+    'Instructions': ['Instruction_1', 'Instruction_2', 'Instruction_3'],
+    'Total Marks': 360,
+    'Total Time (mins)': 180,
+    'Relaxation Quote': 'Lets Rock',
+    # Keys denote till which question the marking scheme is valid. 
+    # Like in this example Qns 1-10 have marking scheme [+4, -2] and for Qns 11-20 marking scheme is [+5, -2]
+    'Paper': 
+    {
+        'Physics' : 
+        {
+            'Marking Scheme': {10: [4, -2], 20: [5, -3]},
+            'Some Key Equations and Values': 'E=mc^2, E = hf',
+            1: 
+            {
+                'Text': 'This is a question based on rotational Mechanics. 
+                         This is supposed to be very \{Some Equation in latex style} hard and you won't be able to solve it. So Leave this question as it is.
+                         Go to your hometown and start farming. Or take Bio-Technology.',
+                'Question_Diagram': ImageInstance,
+                'Answer_Type': 'MCQ',
+                'Answer': ['OptionA', 'OptionB', 'OptionC', 'OptionD'],
+            },
+            2: 
+            {
+                'Text': 'This is a question based on rotational Mechanics. 
+                         This is supposed to be very \{Some Equation in latex style} hard and you won't be able to solve it. So Leave this question as it is.
+                         Go to your hometown and start farming. Or take Bio-Technology.',
+                'Answer_Type': 'Integer Type',
+                'Range': [[0, 100], [1000, 10000]],
+                'Question_Diagram': None,
+            },
+        },
+        'Chemistry' : 
+        {
+            'Marking Scheme': {10: [4, -2], 20: [5, -3]},
+            'Some Key Equations and Values': 'E=mc^2, E = hf',
+            1: 
+            {
+                'Text': 'This is a question based on rotational Mechanics. 
+                         This is supposed to be very \{Some Equation in latex style} hard and you won't be able to solve it. So Leave this question as it is.
+                         Go to your hometown and start farming. Or take Bio-Technology.',
+                'Question_Diagram': ImageInstance,
+                'Answer_Type': 'MCQ',
+                'Answer': ['OptionA', 'OptionB', 'OptionC', 'OptionD'],
+            },
+            2: 
+            {
+                'Text': 'This is a question based on rotational Mechanics. 
+                         This is supposed to be very \{Some Equation in latex style} hard and you won't be able to solve it. So Leave this question as it is.
+                         Go to your hometown and start farming. Or take Bio-Technology.',
+                'Answer_Type': 'Integer Type',
+                'Range': [[0, 100], [1000, 10000]],
+                'Question_Diagram': None,
+            },
+        },
+        'Maths' : 
+        {
+            'Marking Scheme': {10: [4, -2], 20: [5, -3]},
+            'Some Key Equations and Values': 'E=mc^2, E = hf',
+            1: 
+            {
+                'Text': 'This is a question based on rotational Mechanics. 
+                         This is supposed to be very \{Some Equation in latex style} hard and you won't be able to solve it. So Leave this question as it is.
+                         Go to your hometown and start farming. Or take Bio-Technology.',
+                'Question_Diagram': ImageInstance,
+                'Answer_Type': 'MCQ',
+                'Answer': ['OptionA', 'OptionB', 'OptionC', 'OptionD'],
+            },
+            2: 
+            {
+                'Text': 'This is a question based on rotational Mechanics. 
+                         This is supposed to be very \{Some Equation in latex style} hard and you won't be able to solve it. So Leave this question as it is.
+                         Go to your hometown and start farming. Or take Bio-Technology.',
+                'Answer_Type': 'Integer Type',
+                'Range': [[0, 100], [1000, 10000]],
+                'Question_Diagram': None,
+            },
+        },
+    },
+    
+}
