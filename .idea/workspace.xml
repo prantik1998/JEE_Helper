@@ -13,7 +13,6 @@
       <change afterPath="$PROJECT_DIR$/static/css/bootstrap.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/css/bootstrap.css.map" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/dict_to_js/convert_dict_to_pdf.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/dict_to_js/jspdf.min.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/dict_to_js/pdf.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/dummy_pdf/Test.pdf" afterDir="false" />
@@ -24,8 +23,9 @@
       <change afterPath="$PROJECT_DIR$/static/js/bootstrap.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/js/bootstrap.js.map" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/js/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testpapers/templates/create_pdf.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/dict_to_js/convert_dict_to_pdf.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/dict_to_js/convert_dict_to_pdf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testpapers/templates/create_pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/testpapers/templates/create_pdf.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testpapers/templates/testpapers.html" beforeDir="false" afterPath="$PROJECT_DIR$/testpapers/templates/testpapers.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testpapers/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/testpapers/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testpapers/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/testpapers/views.py" afterDir="false" />
@@ -59,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testpapers/templates/create_pdf.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+            <state relative-caret-position="180">
+              <caret line="84" column="26" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -214,8 +214,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testpapers/templates/create_pdf.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        <state relative-caret-position="180">
+          <caret line="84" column="26" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
         </state>
       </provider>
     </entry>

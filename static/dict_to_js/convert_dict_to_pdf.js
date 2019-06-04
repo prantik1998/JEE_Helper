@@ -1,8 +1,8 @@
 var dummy_dict = {
 
     'First_Paper_Heading': 'October PMT',
-    'header' : 'This is a Question Paper',
-    'footer': 'Prime Viman Nagar Pune - 411014',
+    'header' : 'This is a Question Paper', // Done
+    'footer': 'Prime Viman Nagar Pune - 411014', // Done
     'Instructions_Header': 'This is strict and serious and you have to follow it',
     'Instructions': ['Instruction_1', 'Instruction_2', 'Instruction_3'],
     'Total Marks': 360,
@@ -72,32 +72,76 @@ var dummy_dict = {
 }
 var doc = new jsPDF();
 doc.setFont('arial');
-doc.setFontSize(8);
-
+doc.setFontSize(10)
+doc.setFontType("normal");
+doc.right_margin=20;
+doc.left_margin = 20;
+doc.top_margin = 30;
+doc.bottom_margin = 30;
+doc.spacing = 5;
 
 function addQuestion(question)
 {
 	return;
 }
-function addHeader(header)
+function addHeaders(text='This is a Question Paper')
 {
-	return;
+	const pageCount = doc.internal.getNumberOfPages();
+    for(var i = 1; i < pageCount; i++) {
+    	doc.setPage(i+1);
+        doc.text(text, doc.left_margin, 10);
+    }
 }
-function addFooters() {
+function addFooters(text='Prime Viman Nagar Pune - 411014') {
     const pageCount = doc.internal.getNumberOfPages();
     for(var i = 0; i < pageCount; i++) {
-        doc.text(String(i),196,285);
+    	doc.setPage(i+1);
+        doc.text(String(i+1),196,285);
+        doc.text(text, doc.left_margin, 285);
     }
+}
+
+function writeText(text, start_x, start_y, spacing=null, fontSize=null, page=null)
+{
+	if (spacing != null)
+	{
+		doc.spacing = spacing;
+	}
+	if (fontSize != null)
+	{
+		doc.setFontSize(7);
+	}	
+	if (page != null)
+	{
+		doc.page=page; // use this as a counter.
+		doc.setPage(page);
+	}
+
+	var splitTitle = doc.splitTextToSize(text, doc.internal.pageSize.width - doc.right_margin - start_x)
+	var pageHeight = doc.internal.pageSize.height;
+	
+	for( var i=0; i< splitTitle.length; i++){
+		if(start_y > doc.internal.pageSize.height - doc.bottom_margin)
+		{
+			start_y = doc.top_margin;
+			doc.addPage();
+		}
+		doc.text(start_x, start_y, splitTitle[i]);
+		start_y = start_y + doc.spacing
+	}
 }
 
 function create_pdf(dictionary, show=false)
 {
-	doc.page=1; // use this as a counter.
-	doc.text(20, 20, 'Hello world. I am ready to destroy.');
-	doc.addPage();
+	
+	var y = doc.internal.pageSize.height - 20;
+	var string = 'Hello world.Hello world.Hello world. \nHello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.';
+	writeText(string, 20, y)
+	
 	if (show)
 	{
 		addFooters();
+		addHeaders();
 		var string = doc.output('datauristring');
 		document.getElementById('pdf_viewer').src = string;
 		document.getElementById('pdf_viewer').download = "TestPaper.pdf";
