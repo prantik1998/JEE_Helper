@@ -4,13 +4,13 @@
 <div id="center" class="col-md-6" align="center">
 	<form id="Question1">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label for="Subject">Subject</label>
 					<input type="text" class="form-control" id="Subject" placeholder="Physics">
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label for="Question Type">Question Type</label>
 					<select class="form-control" id="Question Type">
@@ -23,13 +23,13 @@
 					
 				</div>
 			</div>
-			<div class="col-md-4">
+			<!-- <div class="col-md-6">
 				<div class="form-group">
 					<label for="Number">Number of question</label>
 					<input type="number" class="form-control" id="number">					
 				</div>
 				
-			</div>
+			</div> -->
 		</div>
 		<div class="row">
 			<div class="col-md-4">
@@ -53,18 +53,25 @@
 			</div>
 		</div>
 		<div class="row" id="questions">
-			<div class="form-group">
+
+			<!-- <div class="form-group">
 				<label for="QuestionText">Question Text</label>
 				<textarea class="form-control" id="QuestionText" rows="5"></textarea>
-			</div>
+			</div> -->
 
 
 			<div class="custom-file" id="Figure">
 				<input type="file" class="custom-file-input" id="validatedCustomFile" required>
-				<img id="blah" src="#" alt="your image" style="visibility: hidden;" />
 				<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
 				<div class="invalid-feedback">Example invalid custom file feedback</div>
+				<button onclick="NewQuestion()" width="10" height="10">New question
+				</button></br>
 			</div>
+			<img id="blah0" src="#" alt="your image" style="visibility: hidden;" />
+
+
+			
+
 		</div>
 	</form>
 	<div class="row">
@@ -75,98 +82,65 @@
 </div>
 
 <script type="text/javascript">
-
+var i=1
+var j=1
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#blah').attr('src', e.target.result);
+            $('#blah'+(i-1)).attr('src', e.target.result);
+	    	console.log(i)
+
         }
 
         reader.readAsDataURL(input.files[0]);
+
     }
 }
 
-document.getElementById("blah").visible = false; 
+// document.getElementById("blah").visible = false; 
 
 $("#validatedCustomFile").change(function(){
-	// var node = document.createElement("img");
-	var node = document.getElementById("blah");
-	node.id = 'blah'
+	var node = document.createElement("img");
+	// var node = document.getElementById("blah");
+	node.id = 'blah'+i
 	node.src = "#"
 	node.alt = "your image"
 	node.style.visibility = "visible";
-	document.getElementById("Figure").appendChild(node); 
+	node.height=300
+	node.width=900
+	document.getElementById("questions").appendChild(node);
     readURL(this);
-
+    i=i+1
 });
-document.getElementById("number").addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode == 13)
-	{
-		var num = document.getElementById("number")
-		
+function NewQuestion() 
+{
+    
+	// var num = document.getElementById("number")
+	
 
-		myNode = document.getElementById("questions")
+	myNode = document.getElementById("questions")
 
-		while (myNode.firstChild) {
-	    myNode.removeChild(myNode.firstChild);
-		}
-		console.log(num.value)
-		for(var i=0;i<num.value;i++)
-		{
-			var doc = document.createElement("div")
-			doc.class= "form-group"
-			var fig = document.createElement("div")
-			fig.class = "custom-file"
-			fig.id = "Figure"+(i+1)			
-			var label = document.createElement("label")
-			label.for="QuestionText"
-			label.innerHTML="QuestionText"
-			var textarea = document.createElement("textarea")
-			textarea.id = "QuestionText"+(i+1)
-			textarea.class = "form-control"
-			textarea.rows = "5"
-			textarea.coloums = "5"
-			doc.appendChild(label)
-			doc.appendChild(document.createElement("br"))
-			doc.appendChild(textarea)
-			doc.appendChild(document.createElement("br"))
-			myNode.appendChild(doc);
-			
-			var input = document.createElement("input")	
-			input.type = "file"
-			input.class = "custom-file-input"
-			var img = document.createElement("img")
-			img.src="#"
-			img.alt="your image"
-			img.id = "blah"+(i+1)
-			img.style.visibility='hidden'
-			var label = document.createElement("label")
-			label.class="custom-file-label"
-			label.for="validatedCustomFile"
-			label.innerHTML="Choose file..."
-			// var div = document.createElement("div")
-			// div.class = "invalid-feedback"
-			// div.innerHTML = "Invalid  custom file feedback"
-			fig.appendChild(input)
-			fig.appendChild(document.createElement("br"))
-			fig.appendChild(img)
-			fig.appendChild(document.createElement("br"))
-			// fig.appendChild(label)
-			// fig.appendChild(document.createElement("br"))
-			// fig.appendChild(div)
-			// fig.appendChild(document.createElement("br"))
-			myNode.appendChild(document.createElement("br"))
 
-			myNode.appendChild(fig);
-			
-		}
-		
-		
-	}
-});
+	var doc = document.createElement("div")
+	doc.class= "form-group"
+	
+	var label = document.createElement("label")
+	label.for="QuestionText"
+	label.innerHTML="QuestionText"
+	var textarea = document.createElement("textarea")
+	textarea.id = "QuestionText"+j
+	textarea.class = "form-control"
+	textarea.rows = 10
+	textarea.cols = 80
+	doc.appendChild(label)
+	doc.appendChild(textarea)
+	myNode.appendChild(doc);	
+	console.log(textarea.id)
+	j=j+1;	
+	
+}
 
 </script>
 {% endblock content %}
