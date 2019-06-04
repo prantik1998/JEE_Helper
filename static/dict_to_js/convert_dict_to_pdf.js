@@ -84,6 +84,11 @@ function addQuestion(question)
 {
 	return;
 }
+function addFirstPageHead(text='October PMT')
+{
+    doc.setPage(1);
+    
+}
 function addHeaders(text='This is a Question Paper')
 {
 	const pageCount = doc.internal.getNumberOfPages();
