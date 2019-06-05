@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>Teachers View</title>
+		<script src="/static/js/jquery-3.3.1.slim.min.js"></script>
+		<script src="/static/js/popper.min.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+		<script src="/static/js/google_auth.js"></script>
+		<meta name="google-signin-scope" content="profile email">
+		<meta name="google-signin-client_id" content="396242970984-rbm8g6jlld6irfg0q6rsf2vm6tpcrk39.apps.googleusercontent.com">
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	</head>
+	<body style="background-color:blue" >
+		<div class="row">
+			<div class="col-lg-5" align="center">
+			</div>
+			<div class="col-lg-2" align="center">
+				<div class="g-signin2" data-onsuccess="onSignIn"  width="200" style="margin-left:auto;margin-right:auto;display:block;margin-top:22%;margin-bottom:0%" >
+				</div> 
+			</div>
+			<div class="col-lg-5" align="center">
+			</div>				
+		</div>   
+	</body>>
+	<script type="text/javascript">
+		function onSignIn(googleUser)
+		{
+			// Useful data for your client-side scripts:
+			var profile = googleUser.getBasicProfile();
+			// The ID token you need to pass to your backend:
+			var id_token = googleUser.getAuthResponse().id_token;
+			sendInfo = {
+			"Name": profile.getId(),
+			"FullName": profile.getName(),
+			"GivenName": profile.getGivenName(),
+			"FamilyName": profile.getFamilyName(),
+			"Email":profile.getEmail(),
+			"Image_Url":profile.getImageUrl(),
+			};
+			$.ajax({
+				type: 'POST',
+				// url: "https://www.autonise.com/signin_info",
+				url:"http://localhost:5000/students/signin_info",
+				data: JSON.stringify(sendInfo),
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function(data) {
+					
+					window.location.href="http://localhost:5000/students/welcome";
+
+				},
+			});			
+		}
+
+	</script>
+</html>

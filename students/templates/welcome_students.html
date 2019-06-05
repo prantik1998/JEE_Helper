@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<title>Welcome</title>
+<head>
+
+
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+<meta name="google-signin-client_id" content="396242970984-rbm8g6jlld6irfg0q6rsf2vm6tpcrk39.apps.googleusercontent.com">
+<!-- <link rel="stylesheet" href="css/my_styles.css"> -->
+<link rel="stylesheet" href="/static/css/misc.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+
+</head>
+
+
+<body  >
+<style>
+	
+	body 
+	{
+		background-color:black;
+	}
+
+.dropdown-content a:hover {background-color: rgb(33, 35, 155);}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+</style>
+
+<div class="row" >
+		
+		<div class="col-lg-4" align="left"  >
+			<!-- <a class="buttonround" ></a><br> -->
+			<!-- <button class="dropdown" onclick="Nav()">My Account</button> -->
+				
+						
+		</div>
+		<div class="col-lg-4" align="center">
+
+    
+                
+	
+    </div>
+    <div class="col-lg-4" align="right">
+
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4" align="left"  >
+                <!-- <a class="buttonround" ></a><br> -->
+                <!-- <button class="dropdown" onclick="Nav()">My Account</button> -->
+                    
+                            
+        </div>
+        <div class="col-lg-4" align="center">
+        <a class="button" onclick="testpaper()"><strong>Download papers</strong> </a><br> 
+        <a class="button" onclick="Doubt()"><strong>SolveDoubts</strong> </a><br> 
+        <a  class="button" onclick="Performance()"><strong>Student performance</strong></a><br>
+        <a  class="button" onclick="AskDoubts()"><strong>Ask Doubts</strong></a>    
+        </div>
+        <div class="col-lg-4" align="right">
+
+        </div>
+
+</div>
+
+
+
+
+
+
+<script>
+    // var ip_address="www.autonise.com"
+    var ip_address=window.location.href.split('/')[2];
+   
+    // window.location.href="www.autonise.com/developer.html";
+    
+    window.onLoad=function() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init({
+          client_id:"396242970984-rbm8g6jlld6irfg0q6rsf2vm6tpcrk39.apps.googleusercontent.com"
+        });
+      });
+    }
+    function Doubt()
+    {
+        alert("comming soon")
+    } 
+    function Performance()
+    {
+        alert("comming soon")
+    }
+    function AskDoubts()
+    {
+        alert("comming soon")
+    }                          
+
+    function testpaper()
+    {
+        alert("comming soon")
+    }
+    
+
+    
+     
+   
+    
+   
+    // console.log(get_email())
+   
+
+    // fetch("https://"+ip_address+"/get_information?name="+get_email()).then(response=>{
+    //     return response.json();}).then(data=>{document.getElementById("document").value=data;
+    // }).catch(err=>{});
+
+
+</script>
+<script src="/static/js/google_auth.js"></script>
+</body>
+</html>

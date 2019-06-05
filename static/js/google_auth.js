@@ -32,7 +32,7 @@ gapi.load('auth2', function() {
 		}
 		else
 		{
-			window.location.href="https://www.autonise.com/signin"	
+			window.location.href="https://localhost/admin/"	
 			// window.location.href="https://localhost/signin.html"
 		}
 		profile = auth2.currentUser.get().getBasicProfile();
@@ -53,19 +53,19 @@ gapi.load('auth2', function() {
 		{
 			get_people(profile.getEmail());
 		}
-		fetch("https://"+ip_address+"/get_information?name="+profile.getEmail()).then(response=>
-		{
-			return response.json();
+		// fetch("https://"+ip_address+"/get_information?name="+profile.getEmail()).then(response=>
+		// {
+		// 	return response.json();
 
-		}).then(data=>
-		{
-			document.getElementById("BboxAnnotated").value=data['MoneyEarned'];
-			document.getElementById("MoneyEarned").value=data['MoneyEarned']/400*120;
+		// }).then(data=>
+		// {
+		// 	document.getElementById("BboxAnnotated").value=data['MoneyEarned'];
+		// 	document.getElementById("MoneyEarned").value=data['MoneyEarned']/400*120;
 
-		}).catch(err=>
-		{
+		// }).catch(err=>
+		// {
 
-		});
+		// });
 	});
 });
 
@@ -81,7 +81,7 @@ function signOut()
 				auth2.signOut().then(function () 
 				{
 				// window.location.href="https://www.autonise.com/signin.html"
-				window.location.href="https://www.autonise.com"
+				window.location.href="http://localhost"
 				});
 		});
 	});

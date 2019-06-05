@@ -55,7 +55,10 @@ ROOT_URLCONF = 'JEE_Helper.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),'/home/prantik/Documents/JEE_Helper/teachers/tempates/'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+        '/home/prantik/Documents/JEE_Helper/teachers/templates/',
+        '/home/prantik/Documents/JEE_Helper/students/templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

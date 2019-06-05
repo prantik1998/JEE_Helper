@@ -12,6 +12,9 @@ from djongo import models
 # Create your views here.
 class TeachersView(TemplateView):
 	template_name="teachers.html"
+
+class WelcomeView(TemplateView):
+	template_name="welcome.html"
 @csrf_exempt
 def signin_info(request):
 	file_val = json.loads(request.body.decode('utf-8'))
@@ -22,14 +25,13 @@ def signin_info(request):
 	mydb = myclient["jee_db"]
 	collection=mydb["teachers"]
 	cursor = collection.find({})
-	j=True
+	user_exist=True
 	for document in cursor:
 		if document['Email']==file_val['Email']:
-			j=False
+			user_exist=False
 			break
-	print(j)
 
-	if j:
+	if user_exist:
 		collection.insert_one(file_val)
 
 	return HttpResponse("true")
