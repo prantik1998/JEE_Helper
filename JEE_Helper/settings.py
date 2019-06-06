@@ -56,6 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
+        '/home/prantik/Documents/JEE_Helper/JEE_Helper/templates',
         '/home/prantik/Documents/JEE_Helper/teachers/templates/',
         '/home/prantik/Documents/JEE_Helper/students/templates/',
         ],

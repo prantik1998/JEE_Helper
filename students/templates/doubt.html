@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/static/css/blog.css">
+<link rel="stylesheet" href="/static/css/misc.css">
+<!-- <script src="/static/js/google_auth.js"/>
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="396242970984-rbm8g6jlld6irfg0q6rsf2vm6tpcrk39.apps.googleusercontent.com"> -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<head>
+</head>
+<header>
+	
+</header>
+<body>
+<ul>
+  <li><a href="http://localhost:5000/students">Home</a></li>
+  <li><a href='http://localhost:5000/students/Maths'>Maths</a></li>
+  <li><a href='http://localhost:5000/students/Chemistry'>Chemistry</a></li>
+  <li><a href='http://localhost:5000/students/Physics'>Physics</a></li>  
+</ul>
+ <h2>Question</h2>
+
+<ol id="questionList">
+  
+</ol>
+<br>
+<div id="myDIV" class="header">
+  <input type="text" id="question" placeholder="Title...">
+  
+</div>
+</body>
+<footer>
+
+</footer>
+<script type="text/javascript">
+var ip_list=window.location.href.split('/')
+var subject=ip_list[ip_list.length-1]
+console.log(subject)
+fetch("/students/question_list?subject="+subject).then(response => {
+
+			return response.json();
+
+		}).then(data => {
+		    //the json response sends arrays as strings so be sure while using them
+			console.log("here")
+			
+			data=data["Question"]
+			data=data[0]
+			for(var i=0;i<data.length;i++)
+			{
+
+				item=document.createElement("li")
+				item.innerHTML=data[i]
+				document.getElementById("questionList").appendChild(item)
+				document.getElementById("questionList").appendChild(document.createElement("br"))
+			}
+
+
+		}).catch(err => {
+		});
+document.getElementById("question").addEventListener('keydown', function(event){
+    if(event.keyCode==13)
+    {
+    	var list=document.getElementById("questionList")
+    	item=document.createElement("li")
+
+    	item.innerHTML=document.getElementById("question").value
+    	document.getElementById("questionList").appendChild(item)
+    	document.getElementById("questionList").appendChild(document.createElement("br"))
+		sendInfo = {			
+			"Email":'prantikchakraborty50@gmail.com',
+			"Question":document.getElementById("question").value,
+			"subject" : subject,
+			};
+			$.ajax({
+				type: 'POST',
+				// url: "https://www.autonise.com/signin_info",
+				url:"http://localhost:5000/students/question",
+				data: JSON.stringify(sendInfo),
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function(data) {
+					
+					console.log("Registered")
+
+				},
+			});		    	
+
+    	document.getElementById("question").value=""
+    }
+} );
+
+</script>
+</html>
