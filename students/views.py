@@ -77,8 +77,8 @@ def Question(request):
 def Question_List(request,path):
 	myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 	mydb = myclient["jee_db"]
-	path="Physics"
-	print(path)
+	path=request.GET["subject"]
+
 	collection=mydb[path]	
 	cursor = collection.find({})
 	data={}
