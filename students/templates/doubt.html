@@ -64,11 +64,13 @@ fetch("/students/question_list?subject="+subject).then(response => {
 
 				var item=document.createElement("li")
 				item.innerHTML=data[i]
+			
 				item.onclick=function(){
-					openNav(item.innerHTML);
+					openNav(this.innerHTML);
 				}
 				document.getElementById("questionList").appendChild(item)
 				document.getElementById("questionList").appendChild(document.createElement("br"))
+
 			}
 
 
