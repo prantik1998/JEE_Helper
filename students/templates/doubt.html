@@ -2,6 +2,7 @@
 <html>
 <link rel="stylesheet" href="/static/css/blog.css">
 <link rel="stylesheet" href="/static/css/misc.css">
+<link rel="stylesheet" href="/static/css/sidenav.css">
 <!-- <script src="/static/js/google_auth.js"/>
 <meta name="google-signin-scope" content="profile email">
 <meta name="google-signin-client_id" content="396242970984-rbm8g6jlld6irfg0q6rsf2vm6tpcrk39.apps.googleusercontent.com"> -->
@@ -10,50 +11,6 @@
 <head>
 </head>
 <header>
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
-
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
 	
 </header>
 <body>
@@ -65,11 +22,10 @@ body {
 </ul>
  <h2>Question</h2>
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <a href="javascript:void(0)" class="closebtn"  onclick="closeNav()">&times;</a>
+  <input type="text" id="header_question"readonly>
+  </br>
+  <input id="answer" type="text">
 </div>
 
 <ol id="questionList">
@@ -79,7 +35,8 @@ body {
 <br>
 
 
-<div id="myDIV" class="header">
+<div id="answerList" class="header">
+  
   <input type="text" id="question" placeholder="Title...">
   
 </div>
@@ -89,6 +46,7 @@ body {
 </footer>
 <script type="text/javascript">
 var ip_list=window.location.href.split('/')
+var  question=''
 var subject=ip_list[ip_list.length-1]
 console.log(subject)
 fetch("/students/question_list?subject="+subject).then(response => {
@@ -104,10 +62,10 @@ fetch("/students/question_list?subject="+subject).then(response => {
 			for(var i=0;i<data.length;i++)
 			{
 
-				item=document.createElement("li")
+				var item=document.createElement("li")
 				item.innerHTML=data[i]
 				item.onclick=function(){
-					document.getElementById("mySidenav").style.width = "250px";
+					openNav(item.innerHTML);
 				}
 				document.getElementById("questionList").appendChild(item)
 				document.getElementById("questionList").appendChild(document.createElement("br"))
@@ -120,10 +78,11 @@ document.getElementById("question").addEventListener('keydown', function(event){
     if(event.keyCode==13)
     {
     	var list=document.getElementById("questionList")
-    	item=document.createElement("li")
+    	var item=document.createElement("li")
     	item.innerHTML=document.getElementById("question").value
     	item.onclick=function(){
-					document.getElementById("mySidenav").style.width = "250px";
+					openNav(item.innerHTML);
+
 				}
     	document.getElementById("questionList").appendChild(item)
     	document.getElementById("questionList").appendChild(document.createElement("br"))
@@ -148,13 +107,48 @@ document.getElementById("question").addEventListener('keydown', function(event){
     	document.getElementById("question").value=""
     }
 } );
-function openNav() {
+document.getElementById("answer").addEventListener("keydown",function(event){
+	if(event.keyCode==13)
+    {
+    	var list=document.getElementById("answerList")
+    	item=document.createElement("label")
+    	item.innerHTML=document.getElementById("answer").value
+    	
+    	document.getElementById("answerList").appendChild(item)
+    	document.getElementById("answerList").appendChild(document.createElement("br"))
+		sendInfo = {			
+			"Email":'prantikchakraborty50@gmail.com',
+			"Question":question,
+			"Answer":document.getElementById("answer").value,
+			"subject" : subject,
+			};
+			$.ajax({
+				type: 'POST',
+				// url: "https://www.autonise.com/signin_info",
+				url:"http://localhost:5000/students/answer",
+				data: JSON.stringify(sendInfo),
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function(data) {					
+					console.log("Registered")
+				},
+			});		    	
+
+    	document.getElementById("question").value=""
+    }
+})
+
+function openNav(val) {
   document.getElementById("mySidenav").style.width = "250px";
+  console.log(val)
+  question=val
+  document.getElementById("header_question").value=question
+
 }
 
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
-
 </script>
 </html>

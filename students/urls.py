@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import StudentsView,signin_info,WelcomeView,DoubtsView,SubjectsView,Question,Question_List
+from .views import StudentsView,signin_info,WelcomeView,DoubtsView,SubjectsView,Question,Question_List,Answer
 
 
 urlpatterns=[
@@ -11,5 +11,6 @@ urlpatterns=[
 	path('Chemistry',SubjectsView.as_view()),
 	path('Physics',SubjectsView.as_view()),
 	path('question',Question),
-	path('question_list<path:path>',Question_List)
+	path('question_list<path:path>',Question_List),
+	path('answer',Answer)
 ]

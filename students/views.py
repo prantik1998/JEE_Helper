@@ -63,7 +63,6 @@ def Question(request):
 	for document in cursor:
 		if document['Email']==file_val['Email']:
 			document["Question"].append(file_val['Question'])			
-			print(document)
 			collection.save(document)
 			return HttpResponse("true")
 
@@ -84,11 +83,35 @@ def Question_List(request,path):
 	data={}
 	data["Question"]=[]
 	for document in cursor:
-		print(document)
 		data["Question"].append(document["Question"])
-	print(data)
 	to_return=json.dumps(data)
 	return JsonResponse(data)
+
+@csrf_exempt
+def Answer(request):
+	file_val = json.loads(request.body.decode('utf-8'))
+	email=file_val['Email']
+	myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+	mydb = myclient["jee_db"]
+	collection=mydb[file_val["subject"]]
+	cursor = collection.find({})
+	user_exist=False
+	del file_val["subject"]	
+	for document in cursor:
+		if document['Email']==file_val['Email']:
+			del document["Answer"]
+			if "Answer" not in document.keys():
+				document["Answer"]={}
+				document["Answer"][file_val['Question']]=[file_val["Answer"]]
+			else:
+				document["Answer"][file_val['Question']]=[file_val["Answer"]]	
+			print(document)
+			collection.save(document)
+			return HttpResponse("true")
+
+	
+# def Answer_List(request,path):
+
 
 
 
