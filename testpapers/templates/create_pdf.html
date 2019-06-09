@@ -6,7 +6,8 @@
 	<script src="/static/js/jquery-3.3.1.slim.min.js"></script>
 	<script src="/static/js/popper.min.js"></script>
 	<script src="/static/js/bootstrap.js"></script>
-	<script type="text/javascript" src="/static/dict_to_js/jspdf.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+	<script src="/static/js/html2canvas.js"></script>
 	<script type="text/javascript">
 		function render()
 		{
@@ -25,16 +26,21 @@
 		::-webkit-scrollbar {
 							display: none;
 							}
+		.ghost  {
+					visibility: hidden;
+					width: '0px';
+					height: '0px';
+				}
 	</style>
 </head>
-<!-- ToDo - Bugs which remain are - 
-	1) scroll bar show in the bottom
+<!-- ToDo - Bugs which remain are -
 	2) pdf title is garbage -->
 <body onresize="render()">
+	<div class="col-md-7 scrollable ghost" id="form_viewer">
+	</div>
 	<div class="row">
-		<div class="col-md-6 scrollable" id="form_viewer">
+		<div class="col-md-6 scrollable">
 			var dummy_dict = {<br>
-
 				'First_Paper_Heading': 'October PMT',<br>
 				'header' : 'This is a Question Paper',<br>
 				'footer': 'Prime Viman Nagar Pune - 411014',<br>
@@ -43,20 +49,20 @@
 				'Total Marks': 360,<br>
 				'Total Time (mins)': 180,<br>
 				'Relaxation Quote': 'Lets Rock',<br>
-				'Paper': <br>
+				'Paper':<br>
 				{<br>
-					'Physics' : <br>
+					'Physics' :<br>
 					{<br>
 						'Marking Scheme': {10: [4, -2], 20: [5, -3]},<br>
 						'Some Key Equations and Values': 'E=mc^2, E = hf',<br>
-						1: <br>
+						1:<br>
 						{<br>
 							'Text': 'This is a question based on rotational Mechanics. This is supposed to be very \{Some Equation in latex style} hard and you won\'t be able to solve it. So Leave this question as it is. Go to your hometown and start farming. Or take Bio-Technology.',<br>
 							'Question_Diagram': '',<br>
 							'Answer_Type': 'MCQ',<br>
 							'Answer': ['OptionA', 'OptionB', 'OptionC', 'OptionD'],<br>
 						},<br>
-						2: <br>
+						2:<br>
 						{<br>
 							'Text': 'This is a question based on rotational Mechanics. This is supposed to be very \{Some Equation in latex style} hard and you won\'t be able to solve it. So Leave this question as it is. Go to your hometown and start farming. Or take Bio-Technology.',<br>
 							'Answer_Type': 'Integer Type',<br>
@@ -64,18 +70,18 @@
 							'Question_Diagram': null,<br>
 						},<br>
 					},<br>
-					'Chemistry' :<br> 
+					'Chemistry' :<br>
 					{<br>
 						'Marking Scheme': {10: [4, -2], 20: [5, -3]},<br>
 						'Some Key Equations and Values': 'E=mc^2, E = hf',<br>
-						1: <br>
+						1:<br>
 						{<br>
-							'Text': 'This is a question based on rotational Mechanics. This is supposed to be very \{Some Equation in latex style} hard and you won\'t be able to solve it. So Leave this question as it is. Go to your hometown and start farming. Or take Bio-Technology.',
+							'Text': 'This is a question based on rotational Mechanics. This is supposed to be very \{Some Equation in latex style} hard and you won\'t be able to solve it. So Leave this question as it is. Go to your hometown and start farming. Or take Bio-Technology.',<br>
 							'Question_Diagram': '',<br>
 							'Answer_Type': 'MCQ',<br>
 							'Answer': ['OptionA', 'OptionB', 'OptionC', 'OptionD'],<br>
 						},<br>
-						2: <br>
+						2:<br>
 						{<br>
 							'Text': 'This is a question based on rotational Mechanics. This is supposed to be very \{Some Equation in latex style} hard and you won\'t be able to solve it. So Leave this question as it is. Go to your hometown and start farming. Or take Bio-Technology.',<br>
 							'Answer_Type': 'Integer Type',<br>
@@ -83,18 +89,18 @@
 							'Question_Diagram': null,<br>
 						},<br>
 					},<br>
-					'Maths' : <br>
+					'Maths' :<br>
 					{<br>
 						'Marking Scheme': {10: [4, -2], 20: [5, -3]},<br>
 						'Some Key Equations and Values': 'E=mc^2, E = hf',<br>
-						1: <br>
+						1:<br>
 						{<br>
 							'Text': 'This is a question based on rotational Mechanics. This is supposed to be very \{Some Equation in latex style} hard and you won\'t be able to solve it. So Leave this question as it is. Go to your hometown and start farming. Or take Bio-Technology.',<br>
 							'Question_Diagram': '',<br>
 							'Answer_Type': 'MCQ',<br>
 							'Answer': ['OptionA', 'OptionB', 'OptionC', 'OptionD'],<br>
 						},<br>
-						2: <br>
+						2:<br>
 						{<br>
 							'Text': 'This is a question based on rotational Mechanics. This is supposed to be very \{Some Equation in latex style} hard and you won\'t be able to solve it. So Leave this question as it is. Go to your hometown and start farming. Or take Bio-Technology.',<br>
 							'Answer_Type': 'Integer Type',<br>
@@ -103,8 +109,8 @@
 						},<br>
 					},<br>
 				},<br>
-				
-			}<br>
+
+			}
 		</div>
 		<div class="col-md-6">
 			<div class="PDF">

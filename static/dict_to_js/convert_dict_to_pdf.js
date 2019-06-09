@@ -70,88 +70,127 @@ var dummy_dict = {
     },
     
 }
-var doc = new jsPDF();
-doc.setFont('arial');
-doc.setFontSize(10)
-doc.setFontType("normal");
-doc.right_margin=20;
-doc.left_margin = 20;
-doc.top_margin = 30;
-doc.bottom_margin = 30;
-doc.spacing = 5;
 
-function addQuestion(question)
-{
-	return;
-}
-function addFirstPageHead(text='October PMT')
-{
-    doc.setPage(1);
-    
-}
-function addHeaders(text='This is a Question Paper')
-{
-	const pageCount = doc.internal.getNumberOfPages();
-    for(var i = 1; i < pageCount; i++) {
-    	doc.setPage(i+1);
-        doc.text(text, doc.left_margin, 10);
+class Creator {
+    constructor() {
+        this.doc = new jsPDF();
+        this.doc.setFont('arial');
+        this.doc.setFontSize(10)
+        this.doc.setFontType("normal");
+        this.doc.right_margin=20;
+        this.doc.left_margin = 20;
+        this.doc.top_margin = 30;
+        this.doc.bottom_margin = 30;
+        this.doc.spacing = 5;
+        console.log(this.doc.internal.pageSize.height);
+        console.log(this.doc.internal.pageSize.width);
+        this.questions = [];
     }
-}
-function addFooters(text='Prime Viman Nagar Pune - 411014') {
-    const pageCount = doc.internal.getNumberOfPages();
-    for(var i = 0; i < pageCount; i++) {
-    	doc.setPage(i+1);
-        doc.text(String(i+1),196,285);
-        doc.text(text, doc.left_margin, 285);
+    convertToVisibleLines(parents)
+    {
+        for(var i=0; i<parents.childNodes.length;++i)
+        {
+            this.convertToVisibleLines(parents.childNodes[i]);
+        }
+        if (parents.textContent != '')
+        {
+            if (parents.childNodes.length==0)
+            {
+                // Write logic here to break a big sentence into continuous smaller lines
+            }
+        }
     }
-}
 
-function writeText(text, start_x, start_y, spacing=null, fontSize=null, page=null)
-{
-	if (spacing != null)
-	{
-		doc.spacing = spacing;
-	}
-	if (fontSize != null)
-	{
-		doc.setFontSize(7);
-	}	
-	if (page != null)
-	{
-		doc.page=page; // use this as a counter.
-		doc.setPage(page);
-	}
+    // Adding a method to the constructor
+    greet() {
+        return `${this.name} says hello.`;
+    }
+    addQuestion(question)
+    {
+        return;
+    }
+    addFirstPageHead(text='October PMT')
+    {
+        this.doc.setPage(1);
 
-	var splitTitle = doc.splitTextToSize(text, doc.internal.pageSize.width - doc.right_margin - start_x)
-	var pageHeight = doc.internal.pageSize.height;
-	
-	for( var i=0; i< splitTitle.length; i++){
-		if(start_y > doc.internal.pageSize.height - doc.bottom_margin)
-		{
-			start_y = doc.top_margin;
-			doc.addPage();
-		}
-		doc.text(start_x, start_y, splitTitle[i]);
-		start_y = start_y + doc.spacing
-	}
-}
+    }
+    addHeaders(text='This is a Question Paper')
+    {
+        const pageCount = this.doc.internal.getNumberOfPages();
+        for(var i = 1; i < pageCount; i++) {
+            this.doc.setPage(i+1);
+            this.doc.text(text, this.doc.left_margin, 10);
+        }
+    }
+    addFooters(text='Prime Viman Nagar Pune - 411014') {
+        const pageCount = this.doc.internal.getNumberOfPages();
+        for(var i = 0; i < pageCount; i++) {
+            this.doc.setPage(i+1);
+            this.doc.text(String(i+1),196,285);
+            this.doc.text(text, this.doc.left_margin, 285);
+        }
+    }
+    create_pdf(dictionary, show=false)
+    {
+        var div = document.getElementById("form_viewer")
+        div.style.visibility = 'visible';
+        div.innerHTML = "Q1. Hello this is going to be a page for easy creation of test papers. "+
+        "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfdf hellow asdf asdf asdf asdfasdf asdf asdf asdf asdfasdf asdf asdf asdf asdf"+
+        "asdf asdf asfd asfd asdf asdf asdf<br><br>"+
+        "Please Choose the correct answer -<br>"+
+        "Option1. Hello &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Option3. Bye<br>"+
+        "Option2. Hi &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Option4. TakeCare<br>"+
+        '<div align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/2/22/An_Experiment_on_a_Bird_in_an_Air_Pump_by_Joseph_Wright_of_Derby%2C_1768.jpg" height="250" width="260"></div>'
+        html2canvas(div, { useCORS: true, allowTaint : true}).then(
+            canvas =>
+            {
+                var img = canvas.toDataURL("image/jpeg,1.0");
+                var string = this.doc.output('datauristring');
+                console.log(string);
+                this.doc.addImage(img, 'JPEG', 1, 2);
+                this.doc.addPage();
+                this.doc.setPage(2);
+                var img = canvas.toDataURL("image/jpeg,1.0");
+                this.doc.addImage(img, 'PNG', 2, 3);
+                document.getElementById('pdf_viewer').src = this.doc.output('bloburl');
+                document.getElementById('pdf_viewer').download = "TestPaper.pdf";
+            }
+        );
+        div.style.visibility = 'hidden';
+        div.style.height = "0"
+        div.style.width = "0"
+    }
+    convert()
+    {
 
-function create_pdf(dictionary, show=false)
-{
-	
-	var y = doc.internal.pageSize.height - 20;
-	var string = 'Hello world.Hello world.Hello world. \nHello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.Hello world.';
-	writeText(string, 20, y)
-	
-	if (show)
-	{
-		addFooters();
-		addHeaders();
-		var string = doc.output('datauristring');
-		document.getElementById('pdf_viewer').src = string;
-		document.getElementById('pdf_viewer').download = "TestPaper.pdf";
-	}
+        this.addFooters();
+        this.addHeaders();
+        var string = this.doc.output('datauristring');
+        document.getElementById('pdf_viewer').src = string;
+        document.getElementById('pdf_viewer').download = "TestPaper.pdf";
+
+
+        this.convertToVisibleLines(document.getElementById('form_viewer'));
+        html2canvas(document.querySelector("#form_viewer")).then(
+            canvas =>
+            {
+                var img = canvas.toDataURL("image/jpeg,1.0");
+                var string = this.doc.output('datauristring');
+                console.log(string);
+                this.doc.addImage(img, 'PNG', 1, 2);
+                document.getElementById('pdf_viewer').src = this.doc.output('bloburl');
+                document.getElementById('pdf_viewer').download = "TestPaper.pdf";
+            }
+        );
+    }
+
 }
 
 render();
-create_pdf(dummy_dict, show=true);
+var doc = new Creator();
+doc.create_pdf(dummy_dict, show=true);
+//doc.convert();
+//console.log(document.getElementById('form_viewer').textContent)
+
+
+
