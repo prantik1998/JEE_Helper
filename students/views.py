@@ -104,18 +104,32 @@ def Answer(request):
 				document["Answer"]={}
 				document["Answer"][file_val['Question']]=[file_val["Answer"]]
 			else:
-				document["Answer"][file_val['Question']]=[file_val["Answer"]]	
+				if file_val["Question"] in document["Answer"].keys():
+					document["Answer"][file_val['Question']].append(file_val["Answer"])	
+				else:
+					document["Answer"][file_val['Question']]=[file_val["Answer"]]
 			print(document)
 			collection.save(document)
 			return HttpResponse("true")
 
 	
-# def Answer_List(request,path):
+def Answer_List(request,path):
+	myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+	mydb = myclient["jee_db"]
+	path=request.GET["subject"]
 
+	collection=mydb[path]	
+	cursor = collection.find({})
+	print(collection['Answer'])
+	data={}
+	for document in cursor:
+		print(document)
+		try :
+			data["Answer"]=document['Answer'][request.GET["question"]]
+		except:
+			pass
 
-
-
-
-
+	to_return=json.dumps(data)
+	return JsonResponse(data)
 
 # Create your views here.
