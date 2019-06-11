@@ -16,8 +16,14 @@
 			<div class="col-sm-4" align="left"></div>
 			<div class="col-sm-4" align="center">
 			<button class="button" onclick="addTeacher()"><strong>Add Teacher</strong></button>
+			</br>
 			<input id="Teacher_Email" type="text" placeholder="Teacher_Email">
-			
+			<div id="Subject" class="dropdown" value="Maths">
+				<a class="buttonsub" onclick="changeSubject(this.innerHTML)">Maths</a> 
+				<a class="buttonsub" onclick="changeSubject(this.innerHTML)">Physics</a> 
+				<a class="buttonsub"onclick="changeSubject(this.innerHTML)">Chemistry</a> 
+
+			</div>		
 			
 			</div>
 			<div class="col-sm-4" align="right"></div>
@@ -28,14 +34,16 @@
 	<script>
 		function addTeacher()
 		{
-		if (document.getElementById("Teacher_Email").value.length==0)
+		if ((document.getElementById("Teacher_Email").value.length==0)||(document.getElementById("Subject").value.length==0))
 		{
 			alert("Nothing added")
 			return 
 
 		}
+		console.log(document.getElementById("Subject").value)
 		sendInfo = {
-			"Email": document.getElementById("Teacher_Email").value,			
+			"Email": document.getElementById("Teacher_Email").value,
+			"Subject":document.getElementById("Subject").value,			
 			};
 			$.ajax({
 				type: 'POST',
@@ -46,10 +54,15 @@
 				processData: false,
 				success: function(data) {
 					alert("Name Added")
-					document.getElementById("Teacher_Email").value=""					
+					document.getElementById("Teacher_Email").value=""
+					document.getElementById("Subject").value=""					
 
 				},
 			});
+		}
+		function changeSubject(subject)
+		{
+			document.getElementById("Subject").value=subject;
 		}
 	</script>
 
