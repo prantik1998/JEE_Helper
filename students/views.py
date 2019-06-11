@@ -108,7 +108,6 @@ def Answer(request):
 					document["Answer"][file_val['Question']].append(file_val["Answer"])	
 				else:
 					document["Answer"][file_val['Question']]=[file_val["Answer"]]
-			print(document)
 			collection.save(document)
 			return HttpResponse("true")
 
@@ -120,10 +119,8 @@ def Answer_List(request,path):
 
 	collection=mydb[path]	
 	cursor = collection.find({})
-	print(collection['Answer'])
 	data={}
 	for document in cursor:
-		print(document)
 		try :
 			data["Answer"]=document['Answer'][request.GET["question"]]
 		except:

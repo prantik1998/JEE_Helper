@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from .views import ConfigView,signin_info
 
 urlpatterns = [
+    path('config/',ConfigView.as_view()),
+    path('config/signin_info',signin_info),
     path('admin/', admin.site.urls),
     path('testpapers/', include('testpapers.urls')),
     path('teachers/',include('teachers.urls')),

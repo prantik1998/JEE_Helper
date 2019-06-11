@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Teachers View</title>
@@ -21,7 +22,7 @@
 			<div class="col-lg-5" align="center">
 			</div>				
 		</div>   
-	</body>>
+	</body>
 	<script type="text/javascript">
 		function onSignIn(googleUser)
 		{
@@ -29,7 +30,8 @@
 			var profile = googleUser.getBasicProfile();
 			// The ID token you need to pass to your backend:
 			var id_token = googleUser.getAuthResponse().id_token;
-			if (check(profile.getId())==false)
+
+			if (check(profile.getEmail())==false)
 			{
 				window.location.href="http://localhost:5000/students"
 			}
@@ -50,15 +52,24 @@
 				processData: false,
 				success: function(data) {
 					
-					window.location.href="http://localhost:5000/teachers/welcome";
+					window.location.href="http://localhost:5000/teachers/welcome"
 
 				},
 			});			
 		}
 		function check(name)
 		{
-			return false
+			fetch("http://localhost:5000/teachers/teacher_name?name="+name).then(response => {
+			return response.json();
+			}).then(data => {
+
+				return data["user_exist"]	
+
+
+			}).catch(err => {
+			});
 		}
+
 
 	</script>
 </html>

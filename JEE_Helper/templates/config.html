@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<link rel="stylesheet" href="/static/css/misc.css">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<head>
+		<title>Config</title>
+	</head>
+
+
+	</style>
+
+	<body bgcolor="black">
+		<div class="row">
+			<div class="col-sm-4" align="left"></div>
+			<div class="col-sm-4" align="center">
+			<button class="button" onclick="addTeacher()"><strong>Add Teacher</strong></button>
+			<input id="Teacher_Email" type="text" placeholder="Teacher_Email">
+			
+			
+			</div>
+			<div class="col-sm-4" align="right"></div>
+
+		</div>
+
+	</body>
+	<script>
+		function addTeacher()
+		{
+		if (document.getElementById("Teacher_Email").value.length==0)
+		{
+			alert("Nothing added")
+			return 
+
+		}
+		sendInfo = {
+			"Email": document.getElementById("Teacher_Email").value,			
+			};
+			$.ajax({
+				type: 'POST',
+				url:"http://localhost:5000/config/signin_info",
+				data: JSON.stringify(sendInfo),
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: function(data) {
+					alert("Name Added")
+					document.getElementById("Teacher_Email").value=""					
+
+				},
+			});
+		}
+	</script>
+
+</html>
