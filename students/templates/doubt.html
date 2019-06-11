@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="/static/css/blog.css">
 <link rel="stylesheet" href="/static/css/misc.css">
 <link rel="stylesheet" href="/static/css/sidenav.css">
- # <script src="/static/js/google_auth.js"/>
+
 <meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="396242970984-rbm8g6jlld6irfg0q6rsf2vm6tpcrk39.apps.googleusercontent.com"> -->
+<meta name="google-signin-client_id" content="396242970984-rbm8g6jlld6irfg0q6rsf2vm6tpcrk39.apps.googleusercontent.com"> 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <head>
@@ -21,10 +21,7 @@
   <li><a href='http://localhost:5000/students/Physics'>Physics</a></li>  
 </ul>
  <h2>Question</h2>
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn"  onclick="closeNav()">&times;</a>
-   <input id="answer" type="text">
-</div>
+<div id="mySidenav" class="sidenav"><a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="closeNav()">&times;</a><input id="answer" type="text"></div>
 
 <ol id="questionList">
 
@@ -109,24 +106,28 @@ document.getElementById("question").addEventListener('keydown', function(event){
 
 function openNav(val) {
   document.getElementById("mySidenav").style.width = "250px";
-  question=val
-  fetch("/students/answer_list?subject="+subject+"&question="+question).then(response => {return response.json();}).then(data => {
+  fetch("/students/answer_list?subject="+subject+"&question="+val).then(response => {return response.json();}).then(data => {
 			data=data["Answer"]
-			var myNode = document.getElementById("mySidenav");
-			while (myNode.firstChild) {
-				if (myNode.firstChild.className=="closebtn")
+			var myNode = document.getElementById("mySidenav")
+			
+			var item=document.createElement("input")
+			item.value=val
+			item.type="text"
+			item.readOnly=true
+			for(var child=myNode.firstChild; child!==null; child=myNode.nextSibling)
+			{
+				console.log(child)
+				if ((child.id=="closebtn")||(child.id=="answer"))
 				{
-					continue
+					continue;
 				}
 				else
 				{
-			    	myNode.removeChild(myNode.firstChild);
-				}
+			    	myNode.removeChild(child);
+			    }
 			}
-			var item=document.createElement("input")
-			item.value=question
-			item.type="text"
-			item.readOnly=true
+
+
 
 			myNode.appendChild(item)
 			myNode.appendChild(document.createElement("br"))
@@ -141,7 +142,8 @@ function openNav(val) {
 			var item=document.createElement("input")
 			item.type="text"
 			item.id="answer"
-			item.addEventListener('keydown',submit_answer(myNode,question))
+			item.addEventListener('keydown',submit_answer,false)
+			item.myParam=val
 			myNode.appendChild(item)
 			myNode.appendChild(document.createElement("br"))
 		}).catch(err => {
@@ -150,7 +152,7 @@ function openNav(val) {
 
 
 }
-function submit_answer(question){
+function submit_answer(event,question){
 	if(event.keyCode==13)
     {
     	var list=document.getElementById("answerList")
