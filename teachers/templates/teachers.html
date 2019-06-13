@@ -30,11 +30,7 @@
 			var profile = googleUser.getBasicProfile();
 			// The ID token you need to pass to your backend:
 			var id_token = googleUser.getAuthResponse().id_token;
-
-			if (check(profile.getEmail())==false)
-			{
-				window.location.href="http://localhost:5000/students"
-			}
+			check(profile.getEmail())
 			sendInfo = {
 			"Name": profile.getId(),
 			"FullName": profile.getName(),
@@ -62,8 +58,11 @@
 			fetch("http://localhost:5000/teachers/teacher_name?name="+name).then(response => {
 			return response.json();
 			}).then(data => {
+				if(data["user_exist"]==false)
+				{
+					window.location.href="http://localhost:5000/students"
+				}
 
-				return data["user_exist"]	
 
 
 			}).catch(err => {

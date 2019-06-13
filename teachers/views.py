@@ -50,3 +50,12 @@ def teacher_name(request):
 	data={"user_exist":user_exist}
 	return JsonResponse(data)
 
+def subject_list(request):
+	email=request.GET["email"]
+	myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+	mydb = myclient["jee_db"]
+	collection=mydb["teachers_name"]
+	cursor = collection.find({})
+	for document in cursor:
+		if document["Email"]==email:
+			return JsonResponse({"students":document["Subject"]})

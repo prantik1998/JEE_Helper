@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/static/css/blog.css">
+<link rel="stylesheet" href="/static/css/misc.css">
+<link rel="stylesheet" href="/static/css/sidenav.css">
+
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="396242970984-rbm8g6jlld6irfg0q6rsf2vm6tpcrk39.apps.googleusercontent.com"> 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<head>
+</head>
+<header>
+	
+</header>
+<body>
+<ul id="teachers">
+  <li><a href="http://localhost:5000/teachers">Home</a></li>
+  
+</ul>
+ <h2>Question</h2>
+<div id="mySidenav" class="sidenav"><a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="closeNav()">&times;</a><input id="answer" type="text"></div>
+
+<ol id="questionList">
+
+</ol>
+  <input id="question" type="text">
+
+<br>
+ 
+
+
+
+</body>
+<footer>
+
+</footer>
+<script type="text/javascript">
+var ip_list=window.location.href.split('/')
+var  question=''
+var subject=ip_list[ip_list.length-1]
+console.log(subject)
+email="prantikchakraborty50@gmail.com"
+fetch("/teachers/subject_list?email="+email).then(response => {
+	return response.json()
+	}).then(data =>{
+
+	})
+
+</script>
+</html>

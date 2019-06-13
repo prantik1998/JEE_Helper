@@ -7,23 +7,60 @@
 	<head>
 		<title>Config</title>
 	</head>
+	<style>
+		.dropbtn {
+		  background-color: #4CAF50;
+		  color: white;
+		  padding: 16px;
+		  font-size: 16px;
+		  border: none;
+		  cursor: pointer;
+		}
 
+		.dropdown {
+		  position: relative;
+		  display: inline-block;
+		}
+
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background-color: #f9f9f9;
+		  min-width: 160px;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 1;
+		}
+
+
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}
+
+		.dropdown-content a:hover {background-color: #f1f1f1}
+
+		.dropdown:hover .dropdown-content {
+		  display: block;
+		}
+
+		.dropdown:hover .dropbtn {
+		  background-color: #3e8e41;
+		}
 
 	</style>
 
-	<body bgcolor="black">
+	<body >
 		<div class="row">
 			<div class="col-sm-4" align="left"></div>
 			<div class="col-sm-4" align="center">
 			<button class="button" onclick="addTeacher()"><strong>Add Teacher</strong></button>
 			</br>
 			<input id="Teacher_Email" type="text" placeholder="Teacher_Email">
-			<div id="Subject" class="dropdown" value="Maths">
-				<a class="buttonsub" onclick="changeSubject(this.innerHTML)">Maths</a> 
-				<a class="buttonsub" onclick="changeSubject(this.innerHTML)">Physics</a> 
-				<a class="buttonsub"onclick="changeSubject(this.innerHTML)">Chemistry</a> 
-
-			</div>		
+			<input type="checkbox" id="Maths" value="Maths" > Maths
+			<input type="checkbox" id="Physics" value="Physics" > Physics
+			<input type="checkbox" id="Chemistry" value="Chemistry" > Chemistry
 			
 			</div>
 			<div class="col-sm-4" align="right"></div>
@@ -32,18 +69,28 @@
 
 	</body>
 	<script>
+
 		function addTeacher()
 		{
-		if ((document.getElementById("Teacher_Email").value.length==0)||(document.getElementById("Subject").value.length==0))
+		if (document.getElementById("Teacher_Email").value.length==0)
 		{
 			alert("Nothing added")
 			return 
 
 		}
-		console.log(document.getElementById("Subject").value)
+		var sub=["Maths","Physics","Chemistry"]
+		var subject=[]
+		for(var i=0;i<sub.length;i++)
+		{
+			if(document.getElementById(sub[i]).checked)
+			{
+				subject.push(sub[i])
+			}
+			
+		}
 		sendInfo = {
 			"Email": document.getElementById("Teacher_Email").value,
-			"Subject":document.getElementById("Subject").value,			
+			"Subject":subject,			
 			};
 			$.ajax({
 				type: 'POST',
@@ -55,15 +102,11 @@
 				success: function(data) {
 					alert("Name Added")
 					document.getElementById("Teacher_Email").value=""
-					document.getElementById("Subject").value=""					
 
 				},
 			});
 		}
-		function changeSubject(subject)
-		{
-			document.getElementById("Subject").value=subject;
-		}
+		
 	</script>
 
 </html>

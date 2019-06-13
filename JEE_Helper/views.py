@@ -16,18 +16,19 @@ class ConfigView(TemplateView):
 @csrf_exempt
 def signin_info(request):
 	file_val = json.loads(request.body.decode('utf-8'))
-	email=file_val['Email']
 	myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 	mydb = myclient["jee_db"]
 	collection=mydb["teachers_name"]
 	cursor = collection.find({})
-	user_exist=True
+	new_user=True
 	for document in cursor:
 		if document['Email']==file_val['Email']:
-			user_exist=False
+			new_user=False
+			document['Subject']=file_val['Subject']
+			collection.save(document)
 			break
 
-	if user_exist:
+	if new_user:
 		collection.insert_one(file_val)
 
 	return HttpResponse("true")
