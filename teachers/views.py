@@ -15,6 +15,10 @@ class TeachersView(TemplateView):
 
 class WelcomeView(TemplateView):
 	template_name="welcome.html"
+
+class SolveView(TemplateView):
+	template_name="solve.html"
+
 @csrf_exempt
 def signin_info(request):
 	file_val = json.loads(request.body.decode('utf-8'))
@@ -58,4 +62,4 @@ def subject_list(request):
 	cursor = collection.find({})
 	for document in cursor:
 		if document["Email"]==email:
-			return JsonResponse({"students":document["Subject"]})
+			return JsonResponse({"Subject":document["Subject"]})
